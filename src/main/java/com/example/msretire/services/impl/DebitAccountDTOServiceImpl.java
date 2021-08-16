@@ -51,7 +51,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .retrieve()
                     .bodyToMono(DebitAccountDTO.class);
         }else if(typeofdebit.equals("FIXEDTERM_ACCOUNT")) {
-            return client.baseUrl("http://localhost:8096")
+            return client.baseUrl("http://localhost:8084/api/fixedTermAccound")
                     .build()
                     .put()
                     .uri("/{id}", Collections.singletonMap("id", debitAccountDTO.getId()))
@@ -87,7 +87,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .exchangeToMono(clientResponse -> clientResponse.bodyToMono(DebitAccountDTO.class))
                     .doOnNext(c -> LOGGER.info("CreditCard Response: CreditCard Amounth={}", c.getAmount()));
         } else if (typeofdebit.equals("FIXEDTERM_ACCOUNT")) {
-            return client.baseUrl("http://localhost:8096")
+            return client.baseUrl("http://localhost:8084/api/fixedTermAccound")
                     .build()
                     .get()
                     .uri("/account/{accountNumber}", params)
