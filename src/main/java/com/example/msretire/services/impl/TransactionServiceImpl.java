@@ -26,7 +26,7 @@ public class TransactionServiceImpl implements ITransactionDTOService {
         LOGGER.info("initializing Transaction create");
 
         return client
-                .baseUrl("http://localhost:8095/api/transaction")
+                .baseUrl("http://TRANSACTION-SERVICE/api/transaction")
                 .build()
                 .post()
                 .accept(MediaType.APPLICATION_JSON)

@@ -31,7 +31,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
         LOGGER.info("El tipo de debito es: " + typeofdebit);
         LOGGER.info("El id del débito es: " + debitAccountDTO.getId());
         if(typeofdebit.equals("SAVING_ACCOUNT")) {
-            return client.baseUrl("http://localhost:8096/api/savingAccount")
+            return client.baseUrl("http://SAVINGACCOUNT-SERVICE/api/savingAccount")
                     .build()
                     .put()
                     .uri("/{id}", Collections.singletonMap("id", debitAccountDTO.getId()))
@@ -41,7 +41,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .retrieve()
                     .bodyToMono(DebitAccountDTO.class);
         }else if(typeofdebit.equals("CURRENT_ACCOUNT")) {
-            return client.baseUrl("http://localhost:8097/api/currentAccount")
+            return client.baseUrl("http://CURRENTACCOUNT-SERVICE/api/currentAccount")
                     .build()
                     .put()
                     .uri("/{id}", Collections.singletonMap("id", debitAccountDTO.getId()))
@@ -71,7 +71,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
         LOGGER.info("initializing Debit query: " + typeofdebit);
         params.put("accountNumber", accountNumber);
         if (typeofdebit.equals("SAVING_ACCOUNT")) {
-            return client.baseUrl("http://localhost:8096/api/savingAccount")
+            return client.baseUrl("http://SAVINGACCOUNT-SERVICE/api/savingAccount")
                     .build()
                     .get()
                     .uri("/account/{accountNumber}", params)
@@ -79,7 +79,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .exchangeToMono(clientResponse -> clientResponse.bodyToMono(DebitAccountDTO.class))
                     .doOnNext(c -> LOGGER.info("Account Response: Account Amounth={}", c.getAmount()));
         }else if (typeofdebit.equals("CURRENT_ACCOUNT")) {
-            return client.baseUrl("http://localhost:8097/api/currentAccount")
+            return client.baseUrl("CURRENTACCOUNT-SERVICE/api/currentAccount")
                     .build()
                     .get()
                     .uri("/account/{accountNumber}", params)
