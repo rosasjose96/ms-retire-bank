@@ -15,6 +15,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Debit account dto service.
+ */
 @Service
 public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
 

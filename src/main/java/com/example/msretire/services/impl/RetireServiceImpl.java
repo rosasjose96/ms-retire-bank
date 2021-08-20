@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * The type Retire service.
+ */
 @Service
 public class RetireServiceImpl implements IRetireService {
 

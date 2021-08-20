@@ -9,8 +9,17 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+/**
+ * The type Router config.
+ */
 @Configuration
 public class RouterConfig {
+    /**
+     * Rutas router function.
+     *
+     * @param handler the handler
+     * @return the router function
+     */
     @Bean
     public RouterFunction<ServerResponse> rutas(RetireHandler handler){
         return route(GET("/api/retire"), handler::findAll)

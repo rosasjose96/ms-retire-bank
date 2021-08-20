@@ -10,12 +10,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+/**
+ * The type Transaction service.
+ */
 @Service
 public class TransactionServiceImpl implements ITransactionDTOService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionServiceImpl.class);
     private final WebClient.Builder client;
 
+    /**
+     * Instantiates a new Transaction service.
+     *
+     * @param client the client
+     */
     @Autowired
     public TransactionServiceImpl(WebClient.Builder client) {
         this.client = client;

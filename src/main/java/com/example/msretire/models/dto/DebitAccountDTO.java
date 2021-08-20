@@ -2,6 +2,9 @@ package com.example.msretire.models.dto;
 
 import lombok.*;
 
+/**
+ * The type Debit account dto.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

@@ -18,6 +18,9 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 
+/**
+ * The type Retire handler.
+ */
 @Component
 @Slf4j(topic = "RETIRE_HANDLER")
 public class RetireHandler {
@@ -32,11 +35,23 @@ public class RetireHandler {
     @Autowired
     private ITransactionDTOService transactionService;
 
+    /**
+     * Find all mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> findAll(ServerRequest request){
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
                 .body(service.findAll(), Retire.class);
     }
 
+    /**
+     * Find debit mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> findDebit(ServerRequest request) {
         String id = request.pathVariable("id");
         return service.findById(id).flatMap((c -> ServerResponse
@@ -47,6 +62,12 @@ public class RetireHandler {
         );
     }
 
+    /**
+     * Create deposit mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> createDeposit(ServerRequest request){
 
         Mono<Retire> retireMono = request.bodyToMono(Retire.class);
@@ -97,6 +118,12 @@ public class RetireHandler {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
+    /**
+     * Delete debit mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> deleteDebit(ServerRequest request){
 
         String id = request.pathVariable("id");
@@ -109,6 +136,12 @@ public class RetireHandler {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
+    /**
+     * Update debit mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> updateDebit(ServerRequest request){
         Mono<Retire> retireMono = request.bodyToMono(Retire.class);
         String id = request.pathVariable("id");
