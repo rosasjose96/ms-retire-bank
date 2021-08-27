@@ -29,11 +29,11 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
 
 
     @Override
-    public Mono<DebitAccountDTO> updateDebit(String typeofdebit, DebitAccountDTO debitAccountDTO) {
+    public Mono<DebitAccountDTO> updateDebit(String typeofAccount, DebitAccountDTO debitAccountDTO) {
         LOGGER.info("initializing Debit Update");
-        LOGGER.info("El tipo de debito es: " + typeofdebit);
+        LOGGER.info("El tipo de debito es: " + typeofAccount);
         LOGGER.info("El id del débito es: " + debitAccountDTO.getId());
-        if(typeofdebit.equals("SAVING_ACCOUNT")) {
+        if(typeofAccount.equals("SAVING_ACCOUNT")) {
             return client.baseUrl("http://SAVINGACCOUNT-SERVICE/api/savingAccount")
                     .build()
                     .put()
@@ -43,7 +43,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .bodyValue(debitAccountDTO)
                     .retrieve()
                     .bodyToMono(DebitAccountDTO.class);
-        }else if(typeofdebit.equals("CURRENT_ACCOUNT")) {
+        }else if(typeofAccount.equals("CURRENT_ACCOUNT")) {
             return client.baseUrl("http://CURRENTACCOUNT-SERVICE/api/currentAccount")
                     .build()
                     .put()
@@ -53,8 +53,8 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .bodyValue(debitAccountDTO)
                     .retrieve()
                     .bodyToMono(DebitAccountDTO.class);
-        }else if(typeofdebit.equals("FIXEDTERM_ACCOUNT")) {
-            return client.baseUrl("http://FIXEDTERMACCOUND-SERVICE/api/fixedTermAccound")
+        }else if(typeofAccount.equals("FIXEDTERM_ACCOUNT")) {
+            return client.baseUrl("http://FIXEDTERMACCOUNT-SERVICE/api/fixedTermAccound")
                     .build()
                     .put()
                     .uri("/{id}", Collections.singletonMap("id", debitAccountDTO.getId()))
@@ -69,11 +69,11 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
 
 
     @Override
-    public Mono<DebitAccountDTO> findByAccountNumber(String typeofdebit, String accountNumber) {
+    public Mono<DebitAccountDTO> findByAccountNumber(String typeofAccount, String accountNumber) {
         Map<String, Object> params = new HashMap<String, Object>();
-        LOGGER.info("initializing Debit query: " + typeofdebit);
+        LOGGER.info("initializing Debit query: " + typeofAccount);
         params.put("accountNumber", accountNumber);
-        if (typeofdebit.equals("SAVING_ACCOUNT")) {
+        if (typeofAccount.equals("SAVING_ACCOUNT")) {
             return client.baseUrl("http://SAVINGACCOUNT-SERVICE/api/savingAccount")
                     .build()
                     .get()
@@ -81,7 +81,7 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .accept(MediaType.APPLICATION_JSON)
                     .exchangeToMono(clientResponse -> clientResponse.bodyToMono(DebitAccountDTO.class))
                     .doOnNext(c -> LOGGER.info("Account Response: Account Amounth={}", c.getAmount()));
-        }else if (typeofdebit.equals("CURRENT_ACCOUNT")) {
+        }else if (typeofAccount.equals("CURRENT_ACCOUNT")) {
             return client.baseUrl("CURRENTACCOUNT-SERVICE/api/currentAccount")
                     .build()
                     .get()
@@ -89,8 +89,8 @@ public class DebitAccountDTOServiceImpl implements IDebitAccountDTOService {
                     .accept(MediaType.APPLICATION_JSON)
                     .exchangeToMono(clientResponse -> clientResponse.bodyToMono(DebitAccountDTO.class))
                     .doOnNext(c -> LOGGER.info("CreditCard Response: CreditCard Amounth={}", c.getAmount()));
-        } else if (typeofdebit.equals("FIXEDTERM_ACCOUNT")) {
-            return client.baseUrl("http://FIXEDTERMACCOUND-SERVICE/api/fixedTermAccound")
+        } else if (typeofAccount.equals("FIXEDTERM_ACCOUNT")) {
+            return client.baseUrl("http://FIXEDTERMACCOUNT-SERVICE/api/fixedTermAccound")
                     .build()
                     .get()
                     .uri("/account/{accountNumber}", params)
