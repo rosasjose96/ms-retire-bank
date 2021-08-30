@@ -13,5 +13,5 @@ public interface ITransactionDTOService {
      * @param transaction the transaction
      * @return the mono
      */
-    public Mono<TransactionDTO> saveTransaction(TransactionDTO transaction);
+    Mono<TransactionDTO> saveTransaction(TransactionDTO transaction);
 }

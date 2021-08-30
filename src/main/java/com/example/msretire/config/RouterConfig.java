@@ -26,6 +26,6 @@ public class RouterConfig {
                 .andRoute(GET("/api/retire/{id}"), handler::findDebit)
                 .andRoute(DELETE("/api/retire/{id}"), handler::deleteDebit)
                 .andRoute(PUT("/api/retire/{id}"), handler::updateDebit)
-                .andRoute(POST("/api/retire"), handler::createDeposit);
+                .andRoute(POST("/api/retire"), handler::createRetire);
     }
 }

@@ -63,12 +63,12 @@ public class RetireHandler {
     }
 
     /**
-     * Create deposit mono.
+     * Create retire mono.
      *
      * @param request the request
      * @return the mono
      */
-    public Mono<ServerResponse> createDeposit(ServerRequest request){
+    public Mono<ServerResponse> createRetire(ServerRequest request){
 
         Mono<Retire> retireMono = request.bodyToMono(Retire.class);
 
